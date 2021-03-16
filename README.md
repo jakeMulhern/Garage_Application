@@ -11,7 +11,7 @@ $ cd Garage_Application
 $ python3 -m venv env
 $ git clone https://github.com/jakeMulhern/Garage_Application.git
 $ source env/bin/activate
-$ cd Garage_Application
+$ cd garage_application
 $ pip install -r requirements.txt
 ```
 Now, in the garage_application directory that contains settings.py create a new file called "config.py".
