@@ -5,13 +5,13 @@ This is a Django REST Framework server program that can receive HTTP requests wi
 
 ## Building
 
+Inside the directory where you would like to have your program files run the following in the terminal:
+
 ```sh
-$ mkdir Garage_Application
+$ git clone https://github.com/jakeMulhern/Garage_Application.git
 $ cd Garage_Application
 $ python3 -m venv env
-$ git clone https://github.com/jakeMulhern/Garage_Application.git
 $ source env/bin/activate
-$ cd garage_application
 $ pip install -r requirements.txt
 ```
 
@@ -25,7 +25,7 @@ SECRET_KEY = <'the-secret-key-that-was-provided-to-you-earlier'>
 -If you will be pushing any commits to GitHub create a .gitignore file and include config.py.
 
 
-To confirm that the application was built correctly you may run the following:
+To confirm that the application was built correctly you may run the following command in the terminal with the virtual environment still activated:
 
 ```sh
 $ python manage.py runserver
