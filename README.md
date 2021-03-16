@@ -1,7 +1,7 @@
 # Garage_Application
 
 
-This is a Django REST Framework server program that can receive HTTP requests with a JSON formatted body payload.  To install and test the program please follow the steps below.
+This is a Django REST Framework server program that can receive HTTP requests with a JSON formatted body payload.  To build and test the program please follow the steps below.
 
 ## Building
 
