@@ -17,7 +17,7 @@ $ pip install -r requirements.txt
 Now, in the garage_application directory that contains settings.py create a new file called "config.py".
 Inside of this file include
 ```sh
-SECRET_KEY = <the-secret-key-that-was-provided-to-you-earlier>
+SECRET_KEY = <'the-secret-key-that-was-provided-to-you-earlier'>
 ```
 -If you will be pushing any commits to GitHub create a .gitignore file and include config.py.
 
