@@ -1,5 +1,4 @@
 from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
 from .views import CarViewSet, TruckViewSet, BoatViewSet, api_root, UserViewSet
 from rest_framework import renderers
 from rest_framework.authtoken import views

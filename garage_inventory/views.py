@@ -1,10 +1,9 @@
 from .models import Car, Truck, Boat
 from .serializers import CarSerializer, TruckSerializer, BoatSerializer, UserSerializer
-from rest_framework import viewsets, permissions, generics
+from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 
 
