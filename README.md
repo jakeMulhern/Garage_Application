@@ -26,7 +26,7 @@ Then visit `http://localhost:8000` to view the app.
 
 Since this application is currently set up to utilize a JWT authentication
 scheme you will see this:
-![Root API View](Garage_Application/garage_inventory/static/garage_inventory/images/API_Root.png)
+![Root API View](garage_inventory/static/garage_inventory/images/API_Root.png)
 
 
 ## Testing
@@ -50,7 +50,7 @@ run the following commands in the terminal:
 $ pip install httpie
 $ http post http://127.0.0.1:8000/api/token/
 ```
-You should notice a 400 Bade Request response and should see that password and username are required.
+You should notice a "400 Bad Request" response and should see that password and username are required.
 
 Now run:
 ```sh
