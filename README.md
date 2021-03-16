@@ -14,11 +14,15 @@ $ source venv/bin/activate
 $ cd Garage_Application
 $ pip install -r requirements.txt
 ```
-Next, in the garage_application directory create a new file called config.py.
-Inside of this file include set SECRET_KEY equal to the secret key that was provided to you earlier.
-If you will be pushing any commits to GitHub create a .gitignore file and include config.py.
+Now, in the garage_application directory that contains settings.py create a new file called "config.py".
+Inside of this file include
+```sh
+SECRET_KEY = <the-secret-key-that-was-provided-to-you-earlier>
+```
+-If you will be pushing any commits to GitHub create a .gitignore file and include config.py.
 
-To confirm that the application was built correctly you may:
+
+To confirm that the application was built correctly you may run the following
 ```sh
 $ python manage.py runserver
 ```
@@ -29,7 +33,8 @@ scheme you will see this:
 ![Root API View](garage_inventory/static/garage_inventory/images/API_Root.png)
 
 
-## Testing
+
+## Running The Automated Tests
 To run the automated tests run:
 
 ```sh
@@ -60,6 +65,24 @@ and now you should notice that the "access" and "refresh" tokens are now availab
 
 
 Using curl:
+
+To download curl:
+```sh
+$ pip install curl
+```
+Then run the following in the terminal
+```sh
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/api/token/
+```
+You should get the following message:
+```sh
+{"username":["This field is required."],"password":["This field is required."]}
+```
+Next, run the following in the terminal
+
 ```sh
 curl \
   -X POST \
@@ -67,3 +90,4 @@ curl \
   -d '{"username": "admin", "password": "password123"}' \
   http://localhost:8000/api/token/
 ```
+Now you should be able to see the "access" and "refresh" tokens successfully
