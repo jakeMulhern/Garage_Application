@@ -48,6 +48,9 @@ You should notice in the terminal that 30 tests pass.
 
 ## Testing the JWT Authentication Scheme:
 
+
+-----------------------------------------------------------------------------------
+
 Using HTTPie:
 
 run the following commands in the terminal:
@@ -63,6 +66,8 @@ $ http post http://127.0.0.1:8000/api/token/ username=admin password=password123
 ```
 and now you should notice that the "access" and "refresh" tokens are now available to you.
 
+
+-----------------------------------------------------------------------------------
 
 Using curl:
 
@@ -91,3 +96,5 @@ curl \
   http://localhost:8000/api/token/
 ```
 Now you should be able to see the "access" and "refresh" tokens successfully
+
+-----------------------------------------------------------------------------------
