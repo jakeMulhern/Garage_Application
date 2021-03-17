@@ -7,7 +7,13 @@ class Vehicle(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    service_interval = models.CharField(max_length=50)
+    service_interval_choices = [
+        (3, '3 Months'),
+        (6 , '6 Months'),
+        (9, '9 Months'),
+        (12, '1 Year'),
+    ]
+    service_interval = models.IntegerField(choices=service_interval_choices)
     next_service = models.CharField(max_length=50)
     class Meta:
         abstract = True

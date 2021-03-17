@@ -17,7 +17,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to get a readable list of all the car objects.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -27,7 +27,7 @@ class CarTests(APITestCase):
         Ensure that we are not able to get a readable list of all the car objects without authorization.
         """
         self.client.force_authenticate(user=None)
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -36,7 +36,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to get each car's details.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -46,7 +46,7 @@ class CarTests(APITestCase):
         Ensure that we are not able to get each car's details without authorization.
         """
         self.client.force_authenticate(user=None)
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -64,7 +64,7 @@ class CarTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 3,
             'next_service': 'July',
         }
         initial_car_count = Car.objects.count()
@@ -87,7 +87,7 @@ class CarTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 3,
             'next_service': 'July',
         }
         initial_car_count = Car.objects.count()
@@ -99,7 +99,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to update car objects.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
         data = {
             'make': 'test',
@@ -109,7 +109,7 @@ class CarTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         self.assertEqual(new_car.make, 'Chevy')
@@ -122,7 +122,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to update car objects.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
         data = {
             'make': 'test',
@@ -132,7 +132,7 @@ class CarTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         self.client.force_authenticate(user=None)
@@ -146,7 +146,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to delete a car object.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         initial_car_count = Car.objects.count()
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
         response = self.client.delete(url)
@@ -157,7 +157,7 @@ class CarTests(APITestCase):
         """
         Ensure that we are able to delete a car object.
         """
-        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_car = Car.objects.create(make='Chevy', model='Equinox', year=2012, seats=4, color='green', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         initial_car_count = Car.objects.count()
         self.client.force_authenticate(user=None)
         url = reverse('car-detail', kwargs={'pk': new_car.pk})
@@ -177,7 +177,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are able to get a readable list of all the truck objects.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('truck-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -187,7 +187,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are not able to get a readable list of all the truck objects without authentication.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         self.client.force_authenticate(user=None)
         url = reverse('truck-list')
         response = self.client.get(url)
@@ -197,7 +197,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are able to get each trucks's details.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -206,7 +206,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are not able to get each trucks's details without authentication.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         self.client.force_authenticate(user=None)
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         response = self.client.get(url)
@@ -226,7 +226,7 @@ class TruckTests(APITestCase):
             'color': 'orange',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         initial_truck_count = Truck.objects.count()
@@ -249,7 +249,7 @@ class TruckTests(APITestCase):
             'color': 'orange',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         initial_truck_count = Truck.objects.count()
@@ -262,7 +262,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are able to update truck objects.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         data = {
             'make': 'test',
@@ -273,7 +273,7 @@ class TruckTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         response = self.client.put(url, data=data)
@@ -286,7 +286,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are not able to update truck objects without authentication.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         data = {
             'make': 'test',
@@ -297,7 +297,7 @@ class TruckTests(APITestCase):
             'color': 'blue',
             'VIN': '12345671234567abc',
             'current_mileage': 20000,
-            'service_interval': '6 months',
+            'service_interval': 6,
             'next_service': 'July',
         }
         self.assertEqual(new_truck.make, 'Ford')
@@ -311,7 +311,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are able to delete a truck object.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         initial_truck_count = Truck.objects.count()
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         response = self.client.delete(url)
@@ -322,7 +322,7 @@ class TruckTests(APITestCase):
         """
         Ensure that we are not able to delete a truck object without authentication.
         """
-        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval='3 months', next_service='april')
+        new_truck = Truck.objects.create(make='Ford', model='Bronco', year=1981, seats=4, bed_length="4 ft", color='orange', VIN='12345671234567abc', current_mileage=19000, service_interval=3, next_service='april')
         initial_truck_count = Truck.objects.count()
         url = reverse('truck-detail', kwargs={'pk': new_truck.pk})
         self.client.force_authenticate(user=None)
@@ -342,7 +342,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are able to get a readable list of all the boat objects.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         url = reverse('boat-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -352,7 +352,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are not able to get a readable list of all the boat objects without authentication.
         """
-        new_truck = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_truck = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         self.client.force_authenticate(user=None)
         url = reverse('boat-list')
         response = self.client.get(url)
@@ -362,7 +362,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are able to get each boat's details.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -371,7 +371,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are not able to get each boat's details without authentication.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         self.client.force_authenticate(user=None)
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         response = self.client.get(url)
@@ -390,7 +390,7 @@ class BoatTests(APITestCase):
             'width': '7 ft',
             'HIN': '12345671234abc',
             'current_hours': 40,
-            'service_interval': '3 months',
+            'service_interval': 3,
             'next_service': 'June',
         }
         initial_boat_count = Boat.objects.count()
@@ -412,7 +412,7 @@ class BoatTests(APITestCase):
             'width': '7 ft',
             'HIN': '12345671234abc',
             'current_hours': 40,
-            'service_interval': '3 months',
+            'service_interval': 3,
             'next_service': 'June',
         }
         initial_boat_count = Boat.objects.count()
@@ -425,7 +425,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are able to update boat objects.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         data = {
             'make': 'Lund',
@@ -435,7 +435,7 @@ class BoatTests(APITestCase):
             'width': '7 ft',
             'HIN': '12345671234abc',
             'current_hours': 40,
-            'service_interval': '3 months',
+            'service_interval': 3,
             'next_service': 'June',
         }
         response = self.client.put(url, data=data)
@@ -448,7 +448,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are not able to update boat objects without authentication.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         data = {
             'make': 'Lund',
@@ -458,7 +458,7 @@ class BoatTests(APITestCase):
             'width': '7 ft',
             'HIN': '12345671234abc',
             'current_hours': 40,
-            'service_interval': '3 months',
+            'service_interval': 3,
             'next_service': 'June',
         }
         self.assertEqual(new_boat.make, 'Bertram')
@@ -472,7 +472,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are able to delete a boat object.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         initial_boat_count = Boat.objects.count()
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         response = self.client.delete(url)
@@ -483,7 +483,7 @@ class BoatTests(APITestCase):
         """
         Ensure that we are not able to delete a boat object without authentication.
         """
-        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval='3 months', next_service='June')
+        new_boat = Boat.objects.create(make='Bertram', model='28CC', year=2021, length='30 ft', width="7 ft", HIN='12345671234abc', current_hours=40, service_interval=3, next_service='June')
         initial_boat_count = Boat.objects.count()
         url = reverse('boat-detail', kwargs={'pk': new_boat.pk})
         self.client.force_authenticate(user=None)
